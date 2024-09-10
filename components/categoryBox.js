@@ -1,8 +1,11 @@
 import { StyleSheet,View,Text, Pressable } from "react-native";
-function Box({children,background}){
+function Box({children,background,onPress}){
 return(
   <View style={styles.container}>
-    <Pressable android_ripple={{color:'#ccc'}} style={({pressed})=>[styles.buttonStyle,pressed?styles.buttonPressed :null]}>
+    <Pressable android_ripple={{color:'#ccc'}} 
+    style={({pressed})=>[styles.buttonStyle,pressed?styles.buttonPressed :null]}
+    onPress={onPress}
+    >
       <View style={[styles.innerContainer,{backgroundColor:background}]}>
         <Text style={styles.title}>
           {children}
