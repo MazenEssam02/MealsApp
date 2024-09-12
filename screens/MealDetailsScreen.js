@@ -3,25 +3,29 @@ import { MEALS } from "../data/dummy-data";
 import MealDetail from "../components/MealDetail";
 import SubTitle from "../components/SubTitle";
 import List from "../components/List";
-import { useLayoutEffect, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import HeaderButton from "../components/HeaderButton";
-
+import { FavoriteContext } from "../store/context/favorite-context";
 
 
 function MealDetailsScreen({route,navigation}){
   const mealId=route.params.id;
   const selectedMeal=MEALS.find((meal)=> mealId===meal.id);
-  const [starred,setStarred]=useState(selectedMeal.isStarred);
-  function headerPressHandler(){
-    selectedMeal.isStarred=!selectedMeal.isStarred;
-    setStarred(selectedMeal.isStarred);
+  const favoriteMealsCtx=useContext(FavoriteContext);
+  const isFavorite=favoriteMealsCtx.ids.includes(mealId);
+  function favoritePressHandler(){
+   if(isFavorite){
+    favoriteMealsCtx.removeFavorite(mealId);
+   }else{
+    favoriteMealsCtx.addFavorite(mealId);
+   }
   }
 
   useLayoutEffect(()=>{
     navigation.setOptions({headerRight:()=>{
-      return <HeaderButton onPress={headerPressHandler} isStarred={starred}/>
+      return <HeaderButton onPress={favoritePressHandler} isStarred={isFavorite}/>
     }})
-  },[navigation,headerPressHandler]);
+  },[navigation,favoritePressHandler]);
 return(
   <ScrollView style={styles.container}>
     <Image source={{uri:selectedMeal.imageUrl}} style={styles.image}/>
