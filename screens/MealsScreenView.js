@@ -1,7 +1,7 @@
 import MealItem from "../components/MealItem";
 import { MEALS } from "../data/dummy-data";
 import { StyleSheet,View,FlatList } from "react-native";
-function MealsScreenView({route}){
+function MealsScreenView({route,navigation}){
   const catId=route.params.categoryId;
   
   // console.log(catId);
@@ -9,13 +9,16 @@ function MealsScreenView({route}){
     return (mealItem.categoryIds.indexOf(catId)>=0);
   });
  function gridMealItem(itemData){
+  function pressHandler(){
+    navigation.navigate('MealDetails',{id:itemData.item.id});
+  }
   return(
-    <MealItem item={itemData.item} />
+    <MealItem item={itemData.item} onPress={pressHandler}/>
   );
  }
 return(
   <View style={styles.container}>
-   <FlatList data={displayedMeals} keyExtractor={(item)=>item.id} renderItem={gridMealItem}/>
+   <FlatList data={displayedMeals} keyExtractor={(item)=>item.id} renderItem={gridMealItem} />
   </View>
 );
 }

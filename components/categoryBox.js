@@ -6,7 +6,7 @@ return(
     style={({pressed})=>[styles.buttonStyle,pressed?styles.buttonPressed :null]}
     onPress={onPress}
     >
-      <View style={[styles.innerContainer,{backgroundColor:background}]}>
+      <View style={styles.innerContainer}>
         <Text style={styles.title}>
           {children}
         </Text>
@@ -40,6 +40,7 @@ innerContainer:{
   flex:1,
   padding:16,
   borderRadius:8,
+  backgroundColor:'#c28ae8'
 },
 title:{
   textAlign:'center',

@@ -1,6 +1,10 @@
 import { StyleSheet,View,Text, Pressable, Image} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import MealDetail from "./MealDetail";
 function MealItem({item,onPress}){
+
 return(
+  
   <View style={styles.container}>
     <Pressable android_ripple={{color:'#ccc'}} 
     style={({pressed})=>[styles.buttonStyle,pressed?styles.buttonPressed :null]}
@@ -15,18 +19,7 @@ return(
             {item.title}
           </Text>
         </View>
-          <View style={styles.detailsContainer}>
-          <Text style={styles.detail}>
-            {item.duration}m
-          </Text>
-          <Text style={styles.detail}>
-            {(item.complexity).toUpperCase()}
-          </Text>
-          <Text style={styles.detail}>
-            {item.affordability.toUpperCase()}
-          </Text>
-        
-          </View>
+          <MealDetail duration={item.duration} complexity={item.complexity} affordability={item.affordability}/>
       </View>
     </Pressable>
   </View>
@@ -69,15 +62,9 @@ title:{
   textAlign:'center',
   fontSize:18,
   fontWeight:'bold',
-  margin:8
-},
-detailsContainer:{
-  flexDirection:'row',
-  justifyContent:'center',
-  alignItems:'center',
   padding:8,
+  borderBottomWidth:5,
+  borderBottomColor:'white',
 },
-detail:{
-  marginHorizontal:4,
-},
+
 });
