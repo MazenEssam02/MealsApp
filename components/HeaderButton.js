@@ -4,7 +4,7 @@ function HeaderButton({onPress,isStarred}){
 
 return(
 <Pressable onPress={onPress} style={({pressed})=>pressed?styles.pressed:null}>
-<Ionicons name={isStarred?"star":"star-outline"} size={24}color={'black'}/>
+<Ionicons name={isStarred?"star":"star-outline"} size={27}color={'black'}/>
 </Pressable>
 );
 }
